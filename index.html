@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Aryan 💘</title>
+
+<style>
+body{
+font-family: Arial, sans-serif;
+background: linear-gradient(to right,#ff9a9e,#fecfef);
+text-align:center;
+padding:40px;
+color:white;
+overflow:hidden;
+}
+
+button{
+padding:15px 25px;
+font-size:18px;
+margin:10px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#noBtn{
+position:absolute;
+background:white;
+color:black;
+}
+
+#yesBtn{
+background:#ff4d6d;
+color:white;
+}
+
+.confetti{
+position:absolute;
+font-size:22px;
+animation: fall 3s linear forwards;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">Aryan 💖</h1>
+<p id="question">Esha has something to ask you 😌</p>
+
+<div id="buttons">
+<button onclick="nextStep()">Start</button>
+</div>
+
+<div id="game"></div>
+<div id="final"></div>
+
+<script>
+let step=0;
+
+/* Funny Romantic Questions */
+function nextStep(){
+step++;
+
+let q=document.getElementById("question");
+let btn=document.getElementById("buttons");
+
+if(step==1){
+q.innerHTML="Do you enjoy talking to Esha all day? 😏";
+btn.innerHTML=`
+<button onclick="nextStep()">Yes obviously 😍</button>
+<button id="noBtn" onmouseover="moveNo()">No 😜</button>`;
+}
+
+else if(step==2){
+q.innerHTML="Who is the cutest person alive?";
+btn.innerHTML=`
+<button onclick="nextStep()">Esha 💖</button>
+<button id="noBtn" onmouseover="moveNo()">Someone else 😏</button>`;
+}
+
+else if(step==3){
+q.innerHTML="Would you miss Esha if she disappears for a day? 🥺";
+btn.innerHTML=`
+<button onclick="startGame()">YES A LOT ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">Maybe not 😜</button>`;
+}
+}
+
+/* Running Wrong Answer */
+function moveNo(){
+let btn=document.getElementById("noBtn");
+btn.style.top=Math.random()*400+"px";
+btn.style.left=Math.random()*400+"px";
+}
+
+/* Click The Right Answer Game */
+function startGame(){
+document.getElementById("question").style.display="none";
+document.getElementById("buttons").style.display="none";
+
+document.getElementById("game").innerHTML=`
+<h2>Mini Game 🎮</h2>
+<p>Click the correct answers to continue 😌</p>
+
+<p>Who loves Aryan the most?</p>
+<button onclick="correct()">Esha ❤️</button>
+<button onclick="wrong()">Random Girl 😜</button>
+
+<p>Who is Aryan's favourite person?</p>
+<button onclick="correct()">Esha again 😌</button>
+<button onclick="wrong()">Anyone else 😏</button>
+
+<p>Who makes Aryan smile?</p>
+<button onclick="correct()">Esha obviously 💕</button>
+<button onclick="wrong()">Nobody 😝</button>
+`;
+}
+
+let correctCount=0;
+
+function correct(){
+correctCount++;
+alert("Correct 😌");
+
+if(correctCount>=3){
+showMessage();
+}
+}
+
+function wrong(){
+alert("Wrong answer 😜 Try again");
+}
+
+/* Cute Message */
+function showMessage(){
+document.getElementById("game").innerHTML=`
+<h2>Message From Esha 💌</h2>
+<p>
+You make my days brighter,  
+my smiles bigger,  
+and my life happier 🥺❤️  
+I love every moment with you...
+</p>
+<button onclick="finalQuestion()">Continue ➜</button>
+`;
+}
+
+/* Final Valentine Question */
+function finalQuestion(){
+document.getElementById("game").style.display="none";
+
+document.getElementById("final").innerHTML=`
+<h1>Will you be Esha's Valentine? 💘🥺</h1>
+
+<button id="yesBtn" onclick="celebrate()">YES ALWAYS 😍</button>
+<button id="noBtn" onmouseover="moveNo()">No 😜</button>
+`;
+}
+
+/* Heart Confetti Explosion */
+function celebrate(){
+document.getElementById("final").innerHTML=
+"<h1>YAYYYY ❤️ Esha is the happiest now 🥰💍</h1>";
+
+for(let i=0;i<60;i++){
+let heart=document.createElement("div");
+heart.className="confetti";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*20)+"px";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),3000);
+}
+}
+</script>
+
+</body>
+</html>
