@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Aryan 💘</title>
+
+<style>
+body{
+font-family: Arial, sans-serif;
+background: linear-gradient(to right,#ff9a9e,#fecfef);
+text-align:center;
+padding-top:60px;
+overflow:hidden;
+color:white;
+}
+
+button{
+padding:15px 25px;
+font-size:18px;
+margin:10px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+}
+
+#yesBtn{
+background:#ff4d6d;
+color:white;
+}
+
+#noBtn{
+background:white;
+position:absolute;
+}
+
+#game{
+display:none;
+}
+
+.heart{
+position:absolute;
+font-size:20px;
+animation: float 4s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-600px);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio autoplay loop>
+<source src="ordinary.mp3" type="audio/mpeg">
+</audio>
+
+<h1 id="title">Aryan 💖</h1>
+<p id="question">Esha has some important questions...</p>
+
+<div id="buttons">
+<button onclick="nextQuestion()">Start 😌</button>
+</div>
+
+<!-- 🎮 Mini Game -->
+<div id="game">
+<h2>Catch the Hearts Game 💕</h2>
+<p>Catch 5 hearts to unlock surprise!</p>
+<p>Score: <span id="score">0</span></p>
+</div>
+
+<p id="finalMsg"></p>
+
+<script>
+let step = 0;
+
+function nextQuestion(){
+step++;
+
+let q = document.getElementById("question");
+let btns = document.getElementById("buttons");
+
+if(step==1){
+q.innerHTML="Do you think Esha is cute? 😏";
+btns.innerHTML=`
+<button onclick="nextQuestion()">Obviously 😍</button>
+<button id="noBtn" onmouseover="moveNo()">No 🙄</button>`;
+}
+
+else if(step==2){
+q.innerHTML="Do you like talking to Esha all day? 📱💕";
+btns.innerHTML=`
+<button onclick="nextQuestion()">Yes always 😌</button>
+<button id="noBtn" onmouseover="moveNo()">Not really 😜</button>`;
+}
+
+else if(step==3){
+q.innerHTML="Would you miss Esha if she disappears for 1 day? 🥺";
+btns.innerHTML=`
+<button onclick="startGame()">YES A LOT ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">Maybe not 😏</button>`;
+}
+}
+
+function moveNo(){
+let btn=document.getElementById("noBtn");
+btn.style.top=Math.random()*400+"px";
+btn.style.left=Math.random()*400+"px";
+}
+
+<!-- 🎮 Mini Game Logic -->
+function startGame(){
+document.getElementById("buttons").style.display="none";
+document.getElementById("question").style.display="none";
+document.getElementById("game").style.display="block";
+
+spawnHeart();
+}
+
+let score=0;
+
+function spawnHeart(){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*90+"vw";
+heart.style.top="90vh";
+
+heart.onclick=function(){
+score++;
+document.getElementById("score").innerText=score;
+heart.remove();
+
+if(score>=5){
+valentineQuestion();
+}
+};
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove()},3000);
+
+if(score<5){
+setTimeout(spawnHeart,800);
+}
+}
+
+<!-- 💘 Final Valentine Question -->
+function valentineQuestion(){
+document.getElementById("game").style.display="none";
+
+document.getElementById("finalMsg").innerHTML=`
+<h1>Aryan 💕</h1>
+<h2>Will you be Esha's Valentine? 💘🥺</h2>
+<button onclick="celebrate()">YES OF COURSE 😍</button>
+<button id="noBtn" onmouseover="moveNo()">No 😜</button>
+`;
+}
+
+function celebrate(){
+document.getElementById("finalMsg").innerHTML=
+"YAYYYY ❤️ Esha is the happiest girlfriend alive 🥰💖";
+
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💘";
+heart.style.left=Math.random()*100+"vw";
+heart.style.bottom="0";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),4000);
+},300);
+}
+</script>
+
+</body>
