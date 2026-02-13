@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Aryan 💘</title>
+
+<style>
+body{
+font-family: Arial, sans-serif;
+background: linear-gradient(to right,#ff758c,#ff7eb3);
+text-align:center;
+padding:40px;
+color:white;
+overflow:hidden;
+}
+
+button{
+padding:14px 22px;
+font-size:18px;
+margin:10px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#noBtn{
+position:absolute;
+background:white;
+color:black;
+}
+
+#yesBtn{
+background:#ff2e63;
+color:white;
+}
+
+.heart{
+font-size:40px;
+cursor:pointer;
+margin:10px;
+display:inline-block;
+}
+
+.confetti{
+position:absolute;
+font-size:24px;
+animation: fall 3s linear forwards;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">Aryan ❤️</h1>
+<p id="question">Esha wants to ask you something 😌</p>
+
+<div id="buttons">
+<button onclick="nextStep()">Start</button>
+</div>
+
+<div id="game"></div>
+
+<script>
+let step = 0;
+
+/* QUESTIONS */
+function nextStep(){
+step++;
+
+let q = document.getElementById("question");
+let btn = document.getElementById("buttons");
+
+if(step==1){
+q.innerHTML="Aryan, do you enjoy talking to Esha everyday? 🥺";
+btn.innerHTML=`
+<button onclick="nextStep()">Yes obviously 😍</button>
+<button id="noBtn" onmouseover="moveNo()">Maybe 😜</button>`;
+}
+
+else if(step==2){
+q.innerHTML="Who makes Aryan smile the most? 😊";
+btn.innerHTML=`
+<button onclick="nextStep()">Esha 💖</button>
+<button id="noBtn" onmouseover="moveNo()">Someone else 😏</button>`;
+}
+
+else if(step==3){
+q.innerHTML="Do you like spending time with Esha? 🫶";
+btn.innerHTML=`
+<button onclick="nextStep()">Always ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">Sometimes 😜</button>`;
+}
+
+else if(step==4){
+q.innerHTML="Would Aryan miss Esha if she disappeared for a day? 🥺";
+btn.innerHTML=`
+<button onclick="nextStep()">A LOT 💕</button>
+<button id="noBtn" onmouseover="moveNo()">Maybe not 😝</button>`;
+}
+
+else if(step==5){
+q.innerHTML="Aryan, ready for a tiny game made by Esha? 🎮";
+btn.innerHTML=`
+<button onclick="startGame()">Let's go 😌</button>`;
+}
+}
+
+/* RUNNING NO BUTTON */
+function moveNo(){
+let btn=document.getElementById("noBtn");
+
+let maxX = window.innerWidth - btn.offsetWidth;
+let maxY = window.innerHeight - btn.offsetHeight;
+
+btn.style.left = Math.random()*maxX + "px";
+btn.style.top = Math.random()*maxY + "px";
+}
+
+/* HEART PUZZLE GAME */
+let heartsClicked = 0;
+
+function startGame(){
+document.getElementById("question").style.display="none";
+document.getElementById("buttons").style.display="none";
+
+document.getElementById("game").innerHTML=`
+<h2>Heart Puzzle 💝</h2>
+<p>Aryan, find and click ALL 5 hearts to unlock Esha's question!</p>
+<div id="heartsArea"></div>
+`;
+
+let area = document.getElementById("heartsArea");
+
+for(let i=0;i<5;i++){
+let heart = document.createElement("span");
+heart.innerHTML="💖";
+heart.className="heart";
+
+heart.style.position="relative";
+heart.style.left=Math.random()*200+"px";
+heart.style.top=Math.random()*100+"px";
+
+heart.onclick=function(){
+heart.style.visibility="hidden";
+heartsClicked++;
+
+if(heartsClicked==5){
+showProposal();
+}
+}
+
+area.appendChild(heart);
+}
+}
+
+/* FINAL PROPOSAL */
+function showProposal(){
+document.getElementById("game").innerHTML=`
+<h1>Aryan, Will You Be Esha's Valentine? 💘🥺</h1>
+<button id="yesBtn" onclick="celebrate()">YESSS ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">No 😜</button>
+`;
+}
+
+/* CONFETTI */
+function celebrate(){
+document.getElementById("game").innerHTML=
+"<h1>YAYYY ❤️ Aryan just made Esha the happiest girl 🥰</h1>";
+
+for(let i=0;i<70;i++){
+let heart=document.createElement("div");
+heart.className="confetti";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*20)+"px";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),3000);
+}
+}
+</script>
+
+</body>
+</html>
