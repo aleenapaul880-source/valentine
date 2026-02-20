@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Yunus ❤️</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(to right,#ff9a9e,#fad0c4);
+    color:#333;
+    overflow:hidden;
+}
+.container{
+    margin-top:100px;
+}
+button{
+    padding:10px 20px;
+    font-size:16px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    margin:10px;
+}
+.yes{
+    background-color:#ff4d6d;
+    color:white;
+}
+.no{
+    background-color:#444;
+    color:white;
+    position:absolute;
+}
+#gameBox{
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2 id="question">Hi Yunus ❤️ Ready for Javeria's cute questions?</h2>
+    <button class="yes" onclick="nextQuestion()">Yes 😍</button>
+    <button class="no" id="noBtn" onmouseover="moveButton()">No 😅</button>
+</div>
+
+<div id="gameBox">
+    <h2>Mini Game 🎯</h2>
+    <p>Click the heart 5 times to unlock the final question!</p>
+    <h1 onclick="heartClick()" style="cursor:pointer;">❤️</h1>
+    <p id="count">0 / 5</p>
+</div>
+
+<script>
+
+let questions = [
+"Do you think Javeria is the cutest girl ever? 😜",
+"Will you always share your fries with me? 🍟",
+"Do I look extra pretty when I’m angry? 😏",
+"Will you tolerate my drama forever? 🎭",
+"Am I your favorite notification? 📱",
+"Would you still love me if I steal your hoodie? 🧥",
+"Do you blush when you see my name? 😊",
+"Are we the cutest couple ever? 💕",
+"Will you watch my favorite movies without complaining? 🎬",
+"Do you secretly love my overthinking? 🤭",
+"Will you travel the world with me someday? ✈️",
+"Do you smile more because of me? 😁",
+"Will you always hug me tight when I’m sad? 🤗",
+"Are you lucky to have Javeria? 😉",
+"Do you promise to love me more every day? ❤️"
+];
+
+let index = -1;
+
+function nextQuestion(){
+    index++;
+    if(index < questions.length){
+        document.getElementById("question").innerHTML = questions[index];
+    } else {
+        document.querySelector(".container").style.display="none";
+        document.getElementById("gameBox").style.display="block";
+    }
+}
+
+function moveButton(){
+    let btn = document.getElementById("noBtn");
+    btn.style.top = Math.random()*80 + "%";
+    btn.style.left = Math.random()*80 + "%";
+}
+
+let heartCount = 0;
+function heartClick(){
+    heartCount++;
+    document.getElementById("count").innerHTML = heartCount + " / 5";
+    if(heartCount >= 5){
+        document.getElementById("gameBox").innerHTML = `
+        <h2>Final Question 💍</h2>
+        <p>Yunus, will you marry me and promise to handle my drama with love? 🥹❤️</p>
+        <button class="yes" onclick="alert('Yayyy! I knew it 😍❤️')">Yes Forever 💖</button>
+        <button class="no" onmouseover="moveButton()">No 🙈</button>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
